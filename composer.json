@@ -1,0 +1,27 @@
+{
+    "name": "sh39works/awslib",
+    "type": "library",
+    "description": "AWS Library",
+    "homepage": "https://github.com/sh39works/awslib",
+    "keywords": [""],
+    "authors": [
+        {
+            "name": "sh39",
+            "email": "sh39works@gmail.com"
+        }
+    ],
+    "require": {
+        "aws/aws-sdk-php": "^3"
+    },
+    "require-dev": {
+    },
+    "scripts": {
+        "test": "awslib"
+    },
+    "autoload": {
+        "psr-0": {
+            "sh39aws\\": "src/",
+        }
+    },
+    "license": "LGPL-2.1"
+}
