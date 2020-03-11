@@ -3,7 +3,7 @@
     "type": "library",
     "description": "AWS Library",
     "homepage": "https://github.com/sh39works/awslib",
-    "keywords": [""],
+    "keywords": ["awslib"],
     "authors": [
         {
             "name": "sh39",
@@ -20,8 +20,8 @@
     },
     "autoload": {
         "psr-0": {
-            "sh39aws\\": "src/",
+            "sh39AWSlib\\": "src/"
         }
     },
-    "license": "LGPL-2.1"
+    "license": "LGPL-2.1-or-later"
 }
