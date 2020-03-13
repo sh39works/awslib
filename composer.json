@@ -19,9 +19,15 @@
         "test": "awslib"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "sh39AWSlib\\": "src/"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/sh39works/awslib.git"
+        }
+    ],
     "license": "LGPL-2.1-or-later"
 }
