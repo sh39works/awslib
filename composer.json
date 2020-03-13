@@ -2,8 +2,6 @@
     "name": "sh39works/awslib",
     "description": "AWS Library",
     "keywords": ["awslib"],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "authors": [
         {
             "name": "sh39",
