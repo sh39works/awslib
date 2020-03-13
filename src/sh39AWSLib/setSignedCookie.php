@@ -19,47 +19,48 @@ $remoteAddress : 現在閲覧しているIPアドレス
 
 class setSignedCookie extends cloudfront
 {
-	private $resourceKey ;
-	private $remoteAddress ;
-	private $domain ;
-	private $privateKey ;
-	private $keyPairId ;
+  private $expire ;
+  private $resourceKey ;
+  private $remoteAddress ;
+  private $domain ;
+  private $privateKey ;
+  private $keyPairId ;
 
-	function __construct(array $args){
-		$this->expire        = ( !empty( $args['expire'] ))
-							 ? $args['expire']
-							 : time()+60*15 ;
-		$this->resourceKey   = $args['resourceKey'] ;
-		$this->remoteAddress = $_SERVER['REMOTE_ADDR'] ;
-		$this->domain        = $args['domain'] ;
-		$this->privateKey    = $args['privateKey'] ;
-		$this->keyPairId     = $args['keyPairId'] ;
-	}
-	function customPolicy(){
-		return <<<POLICY
-		{
-		    "Statement": [
-		        {
-		            "Resource": "{$this->resourceKey}",
-		            "Condition": {
-		                "IpAddress": {"AWS:SourceIp": "{$this->remoteAddress}/32"},
-		                "DateLessThan": {"AWS:EpochTime": {$this->expires}}
-		            }
-		        }
-		    ]
-		}
-		POLICY;
-	}
-	function signedCookie(){
-		return $cloudFront->getSignedCookie([
-			"policy" => $this->customPolicy(),
-			"private_key" => $this->privateKey,
-			"key_pair_id" => $this->keyPairId
-		]);
-	}
-	function set(){
-		foreach ($this->signedCookie() as $name => $value) {
-			setcookie($name, $value, 0, "", $this->domain, true, true);
-		}
-	}
+  function __construct(array $args){
+    $this->expire        = ( !empty( $args['expire'] ))
+                         ? $args['expire']
+                         : time()+60*15 ;
+    $this->resourceKey   = $args['resourceKey'] ;
+    $this->remoteAddress = $_SERVER['REMOTE_ADDR'] ;
+    $this->domain        = $args['domain'] ;
+    $this->privateKey    = $args['privateKey'] ;
+    $this->keyPairId     = $args['keyPairId'] ;
+    }
+    function customPolicy(){
+      return <<<POLICY
+      {
+        "Statement": [
+          {
+            "Resource": "{$this->resourceKey}",
+            "Condition": {
+              "IpAddress": {"AWS:SourceIp": "{$this->remoteAddress}/32"},
+              "DateLessThan": {"AWS:EpochTime": {$this->expires}}
+            }
+          }
+        ]
+      }
+      POLICY;
+    }
+  function signedCookie(){
+    return $cloudFront->getSignedCookie([
+      "policy" => $this->customPolicy(),
+      "private_key" => $this->privateKey,
+      "key_pair_id" => $this->keyPairId
+    ]);
+  }
+  function set(){
+    foreach ($this->signedCookie() as $name => $value) {
+      setcookie($name, $value, 0, "", $this->domain, true, true);
+    }
+  }
 }
