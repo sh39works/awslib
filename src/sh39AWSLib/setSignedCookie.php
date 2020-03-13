@@ -19,7 +19,6 @@ $remoteAddress : 現在閲覧しているIPアドレス
 
 class setSignedCookie extends cloudfront
 {
-	private $expire ;
 	private $resourceKey ;
 	private $remoteAddress ;
 	private $domain ;
